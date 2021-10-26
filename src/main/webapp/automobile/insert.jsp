@@ -1,6 +1,8 @@
 <!doctype html>
 <%@page import="it.prova.gestioneautomobilejspservletjpamaven.model.Automobile"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
 <html lang="it" class="h-100" >
 	 <head>
 	 
@@ -48,25 +50,26 @@
 								<div class="col-md-6">
 									<label for="marca" class="form-label">Marca <span class="text-danger">*</span></label>
 									<input type="text" name="marca" id="marca" class="form-control" placeholder="Inserire il marca"  
-										value="<%=automobileInPagina.getMarca()!=null?automobileInPagina.getMarca():"" %>" required>
+										value="${insert_automobile_attr.marca }" required>
 								</div>
 								
 								<div class="col-md-6">
 									<label for="modello" class="form-label">Modello <span class="text-danger">*</span></label>
 									<input type="text" name="modello" id="modello" class="form-control" placeholder="Inserire la modello"  
-										value="<%=automobileInPagina.getModello()!=null?automobileInPagina.getModello():"" %>" required>
+										value="${insert_automobile_attr.modello }" required>
 								</div>
 							
 								<div class="col-md-6">
 									<label for="prezzo" class="form-label">Prezzo <span class="text-danger">*</span></label>
 									<input type="number" class="form-control" name="prezzo" id="prezzo" placeholder="Inserire prezzo" 
-									value="<%=automobileInPagina.getPrezzo()!=null?automobileInPagina.getPrezzo():"" %>" required>
+									value="${insert_automobile_attr.prezzo }" required>
 								</div>
 								
 								<div class="col-md-3">
+									<fmt:formatDate value="${insert_automobile_attr.dataImmatricolazione}" pattern="dd/MM/yyyy" var="dataImmatricolazione"/>
 									<label for="dataImmatricolazione" class="form-label">Data di Immatricolazione<span class="text-danger">*</span></label>
 									<input class="form-control"  name="dataImmatricolazione" id="dataImmatricolazione" type="date" placeholder="dd/MM/yy" title="formato : gg/mm/aaaa" 
-										value="<%=automobileInPagina.getDataImmatricolazione()!=null? new SimpleDateFormat("yyyy-MM-dd").format(automobileInPagina.getDataImmatricolazione()):""  %>" required/>
+										value="${dataImmatricolazone}" required/>
 								</div>
 								
 								

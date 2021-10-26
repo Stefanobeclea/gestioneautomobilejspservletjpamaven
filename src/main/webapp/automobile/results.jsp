@@ -1,6 +1,8 @@
 <%@page import="it.prova.gestioneautomobilejspservletjpamaven.model.Automobile"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!doctype html>
 <html lang="it" class="h-100" >
@@ -57,21 +59,23 @@
 				                    </tr>
 				                </thead>
 				                <tbody>
-				                	<% List<Automobile> listaAutomobili = (List<Automobile>)request.getAttribute("listaAutomobiliAttribute");
-				                		for(Automobile item:listaAutomobili){ %>
-				                    <tr >
-				                        <td><%=item.getId() %></td>
-				                        <td><%=item.getMarca() %></td>
-				                        <td><%=item.getModello() %></td>
-				                        <td><%=item.getPrezzo() %></td>
-				                        <td><%=item.getDataImmatricolazione()!=null? new SimpleDateFormat("dd/MM/yyyy").format(item.getDataImmatricolazione()):"N.D."%></td>
+				                	
+				                		
+				                <c:forEach var="item" items="${listaAutomobiliAttribute}">
+				             		 <tr >
+				                        <td>${item.id}  	  </td>
+				                        <td>${item.marca}    </td>
+				                        <td>${item.modello}  </td>
+				                        <td>${item.prezzo}   </td>
+				                        <fmt:formatDate value="${item.dataImmatricolazione}" pattern="dd/MM/yyyy" var="dataImmatricolazione"/>
+				                        <td>${dataImmatricolazione}</td>
 				                        <td>
-											<a class="btn  btn-sm btn-outline-secondary" href="ExecuteVisualizzaServlet?idAutomobile=<%=item.getId() %>">Visualizza</a>
-											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="PrepareModificaServlet?idAutomobile=<%=item.getId() %>">Edit</a>
-											<a class="btn btn-outline-danger btn-sm" href="PrepareDeleteServlet?idAutomobile=<%=item.getId() %>">Delete</a>
+											<a class="btn  btn-sm btn-outline-secondary" href="ExecuteVisualizzaServlet?idAutomobile=${item.id}">Visualizza</a>
+											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="PrepareModificaServlet?idAutomobile=${item.id}">Edit</a>
+											<a class="btn btn-outline-danger btn-sm" href="PrepareDeleteServlet?idAutomobile=${item.id}">Delete</a>
 										</td>
 				                    </tr>
-				                    <% } %>
+				                    </c:forEach>
 				                    
 				                </tbody>
 				            </table>
